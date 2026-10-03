@@ -2,16 +2,99 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Spec-sheet look: paper background, hairline grid, one green accent. */
+:root {
+  --paper: #eef1ef;
+  --panel: #f6f8f7;
+  --card: #ffffff;
+  --ink: #121a16;
+  --body-ink: #3a4540;
+  --muted: #66726c;
+  --line: #c8d2cd;
+  --line-strong: #98a7a0;
+  --accent: #2f6b47;
+  --accent-hover: #24553a;
+  --accent-ink: #f6fbf8;
+}
+
+.dark {
+  --paper: #0f1412;
+  --panel: #141a17;
+  --card: #18201c;
+  --ink: #e8eeea;
+  --body-ink: #b9c4be;
+  --muted: #8a9690;
+  --line: #27322d;
+  --line-strong: #3d4b44;
+  --accent: #7fbf97;
+  --accent-hover: #9bd1ae;
+  --accent-ink: #0f1412;
+}
+
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--paper);
+  color: var(--body-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Faint drafting-paper grid behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
 }
 
 ::selection {
-  background-color: #3f6b4f;
-  color: #fbfbf9;
+  background-color: var(--accent);
+  color: var(--accent-ink);
 }
 
-/* keep numeric tables aligned */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* keep numeric figures aligned */
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* One load-in moment for the hero; nothing else animates. */
+@keyframes intro-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.intro {
+  animation: intro-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.intro-delay {
+  animation: intro-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.12s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .intro,
+  .intro-delay {
+    animation: none;
+  }
 }

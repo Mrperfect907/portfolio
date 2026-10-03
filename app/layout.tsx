@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import { Archivo, Newsreader, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const display = Archivo({
+const sans = IBM_Plex_Sans({
   subsets: ["latin"],
-  variable: "--font-display",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
   display: "swap",
 });
 
-const body = Newsreader({
+const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -47,7 +43,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body
-        className={`${display.variable} ${body.variable} ${mono.variable} max-w-4xl mx-auto px-6 py-10 font-serif transition-colors duration-300 bg-paper text-ink dark:bg-ink dark:text-paper`}
+        className={`${sans.variable} ${mono.variable} font-sans leading-relaxed transition-colors duration-300`}
       >
         {children}
       </body>
