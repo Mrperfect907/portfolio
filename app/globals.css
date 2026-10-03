@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #3f6b4f;
+  color: #fbfbf9;
+}
+
+/* keep numeric tables aligned */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
